@@ -1,0 +1,10 @@
+# User-specific stuff
+.idea/
+target/
+keepitwebproject2018next.iml
+
+# IntelliJ
+out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
