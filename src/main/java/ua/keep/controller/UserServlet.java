@@ -1,5 +1,9 @@
 package ua.keep.controller;
 
+import ua.keep.model.User;
+import ua.keep.reporitory.UserRepository;
+import ua.keep.view.UserView;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,9 +21,33 @@ public class UserServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
-        out.println("<html><head><title>MyServlet</title></head><body>");
-        out.write("<H1>Hello Servlet World! User!</H1>");
-        out.println("</body>");
-        out.println("</html>");
+        UserView userView = new UserView();
+
+        if ( request.getParameter("email") != null ) {
+            UserRepository userRepository = new UserRepository();
+            User user = userRepository.getUserByEmailByPassword(request.getParameter("email"),
+                    request.getParameter("password"));
+            if ( user == null ) {
+                out.write("Please Login Again");
+            } else {
+                out.write("Wellcome " + user.getUserName() + "<br>");
+                out.write(user.toString());
+            }
+
+        }
+
+        switch (request.getPathInfo()) {
+            case "/login/":
+                out.write(userView.getLogin());
+                break;
+            case "/register":
+                break;
+                default:
+                    out.println("<html><head><title>MyServlet</title></head><body>");
+                    out.write("<H1>Hello Servlet World! User!</H1>");
+                    out.write("URI   \t" + request.getPathInfo());
+                    out.println("</body>");
+                    out.println("</html>");
+        }
     }
 }

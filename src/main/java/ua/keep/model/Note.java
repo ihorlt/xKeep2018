@@ -1,5 +1,8 @@
 package ua.keep.model;
 
+/**
+ * Personal Notes for everu user
+ */
 public class Note {
     private long id;
     private long user_id;
