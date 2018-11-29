@@ -1,7 +1,7 @@
 # User-specific stuff
 .idea/
 target/
-keepitwebproject2018next.iml
+*.iml
 
 # IntelliJ
 out/
