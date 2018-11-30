@@ -1,5 +1,6 @@
 package ua.keep.controller;
 
+import ua.keep.view.IndexSingleton;
 import ua.keep.view.MainView;
 
 import javax.servlet.ServletException;
@@ -10,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-@WebServlet(name = "MainServlet", urlPatterns = {"/main"})
+@WebServlet(name = "MainServlet", urlPatterns = {"/main"}, loadOnStartup = 1)
 public class MainServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -24,5 +25,15 @@ public class MainServlet extends HttpServlet {
         mainView.setTitle("xKeep");
         mainView.setContent("<h1 class=\"cover-heading\">Hello Bootstrap World!</h1>");
         out.println(mainView.getHtml());
+    }
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        //set path
+        String path = getServletContext().getRealPath("/html/");
+        IndexSingleton indexSingleton = IndexSingleton.getInstance();
+        indexSingleton.setHtmlPath(path);
+        indexSingleton.setPage("index.html");
     }
 }
