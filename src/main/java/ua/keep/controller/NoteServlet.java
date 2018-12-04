@@ -1,6 +1,6 @@
 package ua.keep.controller;
 
-import ua.keep.model.User;
+import ua.keep.controller.dao.entities.User;
 import ua.keep.view.IndexSingleton;
 
 import javax.servlet.ServletException;

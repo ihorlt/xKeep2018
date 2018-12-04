@@ -1,7 +1,7 @@
 package ua.keep.controller;
 
-import ua.keep.model.User;
-import ua.keep.reporitory.UserRepository;
+import ua.keep.controller.dao.entities.User;
+import ua.keep.controller.dao.reporitory.UserRepository;
 import ua.keep.view.UserView;
 
 import javax.servlet.ServletException;

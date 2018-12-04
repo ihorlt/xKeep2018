@@ -1,4 +1,4 @@
 /**
  * Models for keep for Database
  */
-package ua.keep.model;
+package ua.keep.controller.dao.entities;

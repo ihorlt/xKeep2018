@@ -1,4 +1,4 @@
-package ua.keep.model;
+package ua.keep.controller.dao.entities;
 
 /**
  * Personal Notes for everu user
@@ -9,18 +9,21 @@ public class Note {
     private String title;
     private String text;
     private String dateEdited;
-    private int color;
+    private String colorText;
+    private String colorBackground;
 
-    public Note(long id, long user_id, String title, String text, String dateEdited, int color) {
+    public Note() {
+    }
+
+    public Note(long id, long user_id, String title, String text,
+                String dateEdited, String colorText, String colorBackground) {
         this.id = id;
         this.user_id = user_id;
         this.title = title;
         this.text = text;
         this.dateEdited = dateEdited;
-        this.color = color;
-    }
-
-    public Note() {
+        this.colorText = colorText;
+        this.colorBackground = colorBackground;
     }
 
     public long getId() {
@@ -63,12 +66,20 @@ public class Note {
         this.dateEdited = dateEdited;
     }
 
-    public int getColor() {
-        return color;
+    public String getColorText() {
+        return colorText;
     }
 
-    public void setColor(int color) {
-        this.color = color;
+    public void setColorText(String colorText) {
+        this.colorText = colorText;
+    }
+
+    public String getColorBackground() {
+        return colorBackground;
+    }
+
+    public void setColorBackground(String colorBackground) {
+        this.colorBackground = colorBackground;
     }
 
     @Override
@@ -79,7 +90,8 @@ public class Note {
                 ", title='" + title + '\'' +
                 ", text='" + text + '\'' +
                 ", dateEdited='" + dateEdited + '\'' +
-                ", color=" + color +
+                ", colorText='" + colorText + '\'' +
+                ", colorBackground='" + colorBackground + '\'' +
                 '}';
     }
 }
