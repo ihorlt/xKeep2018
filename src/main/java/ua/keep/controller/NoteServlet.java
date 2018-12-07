@@ -1,7 +1,7 @@
 package ua.keep.controller;
 
-import ua.keep.controller.dao.entities.User;
-import ua.keep.view.IndexSingleton;
+import ua.keep.dao.entities.User;
+import ua.keep.view.NoteView;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,12 +26,11 @@ public class NoteServlet extends HttpServlet {
         User user = (User) session.getAttribute("user");
 
         if (user == null) {
-            response.sendRedirect("/user/login/");
+            response.sendRedirect("/main");
             return;
         }
 
-        IndexSingleton indexSingleton = IndexSingleton.getInstance();
-        String readyPage = indexSingleton.getPage().replace(" ###content###", "<h1>Hello File</h1>");
-        out.println(readyPage);
+        NoteView noteView = new NoteView();
+        out.println(noteView.getHtml());
     }
 }

@@ -1,4 +1,4 @@
-package ua.keep.controller.dao.entities;
+package ua.keep.dao.entities;
 
 public class User {
     private long id;

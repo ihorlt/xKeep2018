@@ -1,4 +1,4 @@
-package ua.keep.controller.dao.reporitory;
+package ua.keep.dao.reporitory;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
