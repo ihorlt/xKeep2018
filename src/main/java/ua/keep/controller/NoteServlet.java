@@ -1,6 +1,8 @@
 package ua.keep.controller;
 
+import ua.keep.dao.entities.Note;
 import ua.keep.dao.entities.User;
+import ua.keep.dao.reporitory.NoteRepository;
 import ua.keep.view.NoteView;
 
 import javax.servlet.ServletException;
@@ -11,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Timestamp;
 
 @WebServlet(name = "NoteServlet", urlPatterns = {"/note/*"})
 public class NoteServlet extends HttpServlet {
@@ -28,6 +31,20 @@ public class NoteServlet extends HttpServlet {
         if (user == null) {
             response.sendRedirect("/main");
             return;
+        }
+
+        // save note
+        if ( request.getParameter("title") != null ) {
+            Note note = new Note();
+            note.setTitle(request.getParameter("title"));
+            note.setText(request.getParameter("note"));
+            note.setColorText(request.getParameter("colorFont"));
+            note.setColorBackground(request.getParameter("background"));
+            note.setUser_id(user.getId());
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            note.setDateEdited(timestamp.toString());
+            NoteRepository noteRepository = new NoteRepository();
+            noteRepository.saveNote(note);
         }
 
         NoteView noteView = new NoteView();
