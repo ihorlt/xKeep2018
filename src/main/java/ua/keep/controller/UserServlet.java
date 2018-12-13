@@ -2,6 +2,7 @@ package ua.keep.controller;
 
 import ua.keep.dao.entities.User;
 import ua.keep.dao.reporitory.UserRepository;
+import ua.keep.formvalidator.RegisterFormValidator;
 import ua.keep.view.UserView;
 
 import javax.servlet.ServletException;
@@ -25,12 +26,22 @@ public class UserServlet extends HttpServlet {
         HttpSession session = request.getSession();
 
         if ( request.getParameter("email") != null ) {
-            UserRepository userRepository = new UserRepository();
-            User user = new User();
-            user.setUserName(request.getParameter("username"));
-            user.setEmail(request.getParameter("email"));
-            user.setPassword(request.getParameter("password"));
-            userRepository.saveUser(user);
+            RegisterFormValidator registerFormValidator =
+                    new RegisterFormValidator(
+                            request.getParameter("username"),
+                            request.getParameter("email"),
+                            request.getParameter("password")
+                    );
+            if ( ! registerFormValidator.isFormValid() ) {
+                out.println(registerFormValidator.getMessageError());
+            } else {
+                UserRepository userRepository = new UserRepository();
+                User user = new User();
+                user.setUserName(request.getParameter("username"));
+                user.setEmail(request.getParameter("email"));
+                user.setPassword(request.getParameter("password"));
+                userRepository.saveUser(user);
+            }
         }
 
         switch (request.getPathInfo()) {
