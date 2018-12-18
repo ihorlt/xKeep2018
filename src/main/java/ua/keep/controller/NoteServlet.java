@@ -33,6 +33,7 @@ public class NoteServlet extends HttpServlet {
             return;
         }
 
+        NoteRepository noteRepository = new NoteRepository();
         // save note
         if ( request.getParameter("title") != null ) {
             Note note = new Note();
@@ -43,11 +44,17 @@ public class NoteServlet extends HttpServlet {
             note.setUser_id(user.getId());
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             note.setDateEdited(timestamp.toString());
-            NoteRepository noteRepository = new NoteRepository();
             noteRepository.saveNote(note);
         }
-
         NoteView noteView = new NoteView();
-        out.println(noteView.getHtml());
+        switch (request.getPathInfo()) {
+            case "/index":
+                out.println(noteView.getIndex(noteRepository.getNotesByUserId(user.getId())));
+                break;
+                default:
+                    out.println(noteView.getHtml());
+        }
+
+
     }
 }

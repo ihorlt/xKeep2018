@@ -71,7 +71,7 @@ public class RegisterFormValidator {
 
         // check password has min 1 number
         CheckField checkFieldMin1Number = field -> {
-            boolean res = field.matches("^[0-9]$");
+            boolean res = field.matches("");
             if (! res) {
                 messageError = "Password should contains a number!";
             }
