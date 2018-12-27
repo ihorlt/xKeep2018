@@ -8,6 +8,7 @@ public class Note {
     private long user_id;
     private String title;
     private String text;
+    private String noteType;
     private String dateEdited;
     private String colorText;
     private String colorBackground;
@@ -16,11 +17,13 @@ public class Note {
     }
 
     public Note(long id, long user_id, String title, String text,
-                String dateEdited, String colorText, String colorBackground) {
+                String noteType, String dateEdited, String colorText,
+                String colorBackground) {
         this.id = id;
         this.user_id = user_id;
         this.title = title;
         this.text = text;
+        this.noteType = noteType;
         this.dateEdited = dateEdited;
         this.colorText = colorText;
         this.colorBackground = colorBackground;
@@ -58,6 +61,14 @@ public class Note {
         this.text = text;
     }
 
+    public String getNoteType() {
+        return noteType;
+    }
+
+    public void setNoteType(String noteType) {
+        this.noteType = noteType;
+    }
+
     public String getDateEdited() {
         return dateEdited;
     }
@@ -89,6 +100,7 @@ public class Note {
                 ", user_id=" + user_id +
                 ", title='" + title + '\'' +
                 ", text='" + text + '\'' +
+                ", noteType='" + noteType + '\'' +
                 ", dateEdited='" + dateEdited + '\'' +
                 ", colorText='" + colorText + '\'' +
                 ", colorBackground='" + colorBackground + '\'' +

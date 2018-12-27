@@ -39,6 +39,7 @@ public class NoteServlet extends HttpServlet {
             Note note = new Note();
             note.setTitle(request.getParameter("title"));
             note.setText(request.getParameter("note"));
+            note.setNoteType(request.getParameter("typenote"));
             note.setColorText(request.getParameter("colorFont"));
             note.setColorBackground(request.getParameter("background"));
             note.setUser_id(user.getId());
@@ -51,8 +52,12 @@ public class NoteServlet extends HttpServlet {
             case "/index":
                 out.println(noteView.getIndex(noteRepository.getNotesByUserId(user.getId())));
                 break;
-                default:
-                    out.println(noteView.getHtml());
+            case "/edit":
+                Note note = noteRepository.getNotesById(Long.parseLong(request.getParameter("id")));
+                out.println(noteView.getExistingNote(note));
+                break;
+            default:
+                out.println(noteView.getHtml());
         }
 
 
